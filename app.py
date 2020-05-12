@@ -12,9 +12,19 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/get_tasks')
 def get_tasks():
-    return render_template("tasks.html", tasks=mongo.db.task_manager.find())
+    return render_template("tasks.html", tasks=mongo.db.tasks.find())
+
+@app.route('/add_task')
+def add_task():
+    return render_template("addtask.html", categories=mongo.db.categories.find())
+
+@app.route('/insert_task', methods=['POST'])
+def insert_task():
+    tasks = mongo.db.tasks
+    tasks.insert_one(request.form.to.dict())
+    return redirect(url_for('get_tasks'))
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP', '0.0.0.0'),
+    app.run(host=os.environ.get('IP', '0.0.0.0:8080'),
         port=int(os.environ.get('PORT', '5000')),
         debug=True)
