@@ -1,5 +1,5 @@
 {% extends 'base.html' %} {% block content %}
-<h3>Add Task</h3>
+<h3>Add task</h3>
     <div class="row">
         <form action="{{ url_for('insert_task') }}" method="POST" class="col s12">
             <div class="row">
@@ -9,7 +9,7 @@
                         <select id="category" name="category-name">
                         <option value="" disabled selected>Choose Category</option>
                         {% for cat in categories %}
-                            <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+                        <option value="{{cat.category_name}}">{{cat.category_name}}</option>
                         {% endfor %}
                         </select>
                         <label>Task Category</label>
