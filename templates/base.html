@@ -26,9 +26,12 @@
             close: 'Ok',
             closeOnSelect: false // close when date selected
         });
+        
+        window.onload= function (){
             document.getElementById('matfix').addEventListener("click", function(e) {
-            e.stopPropagation();
-        });
+                e.stopPropagation();
+            });
+        };
     </script>
 
 </body>
