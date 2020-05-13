@@ -10,6 +10,7 @@ app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 mongo = PyMongo(app)
 
 @app.route('/')
+
 @app.route('/get_tasks')
 def get_tasks():
     return render_template("tasks.html", tasks=mongo.db.tasks.find())
@@ -25,6 +26,6 @@ def insert_task():
     return redirect(url_for('get_tasks'))
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP', '0.0.0.0'),
+    app.run(host=os.environ.get('IP', '0.0.0.0:8000'),
         port=int(os.environ.get('PORT', '5000')),
         debug=True)
