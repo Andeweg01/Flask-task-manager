@@ -1,11 +1,11 @@
 import os
 from flask import Flask, render_template, redirect, request, url_for
 from flask_pymongo import PyMongo
-from bson.objectid import ObjectId 
+from bson.objectid import ObjectId
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'task_manager'
-app.config["MONGO_URI"] = os.getenv('MONGO_URI')
+app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 
 mongo = PyMongo(app)
 
@@ -25,6 +25,6 @@ def insert_task():
     return redirect(url_for('get_tasks'))
 
 if __name__ == '__main__':
-    app.run(host=os.environ.get('IP', '0.0.0.0:8080'),
+    app.run(host=os.environ.get('IP', '0.0.0.0'),
         port=int(os.environ.get('PORT', '5000')),
         debug=True)
